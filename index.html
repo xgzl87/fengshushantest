@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      :root {
+        font-size: 20px;
+      }
+
+      * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      *:before,
+      *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+      p {
+        margin: 0;
+      }
+      .fsswjContainer {
+        display: flex;
+        flex-direction: column;
+      }
+      .fsswjContainer p {
+        margin: 0;
+      }
+      .fsswjContent {
+        display: flex;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+          Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+          Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        flex-direction: column;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #484848;
+        padding: 1rem 0.42rem;
+      }
+      .fsswjContent .wj-log {
+        display: flex;
+      }
+      .fsswjContent .wj-log img {
+        width: 100%;
+        height: auto;
+      }
+      .fsswjContent .survey-text {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0.3rem 0.18rem 0.12rem;
+        background-color: transparent;
+        box-shadow: none;
+      }
+      .fsswjContent .survey-text .wj_title {
+        text-align: center;
+        font-size: 0.68rem;
+        font-weight: 700;
+        overflow: hidden;
+        font-family: PingFangSC-Medium, SourceHanSansSC-Medium;
+        color: #484848;
+        margin-top: 0.8rem;
+      }
+      .fsswjContent .survey-text .wj-desc {
+        font-size: 0.5rem;
+      }
+      .fsswjContent .survey-text .wj-desc > :last-child {
+        text-align: right;
+      }
+      .fsswjContent .wj-question {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 0.7rem 0.5rem;
+        min-height: 1.2rem;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      .fsswjContent .wj-question .topic-title {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        margin: 0 0 0.92rem;
+        color: #484848;
+        font-size: 0.6rem;
+        font-weight: bold;
+      }
+      .fsswjContent .wj-question .topic-title .asterisk {
+        color: #ff6d56;
+        margin-left: 5px;
+        font-size: 0.92rem;
+        vertical-align: top;
+      }
+      .fsswjContent .wj-question .option-radio-group {
+        -webkit-font-smoothing: antialiased;
+        color: #707070;
+        padding: 0;
+        position: relative;
+        min-height: 1.5rem;
+        display: block;
+        margin-left: 0;
+        border-radius: 0.1rem;
+        border: 1px solid #f3f3f3;
+        border-bottom: 0px;
+      }
+      .fsswjContent .wj-question .option-radio-group ul {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+      }
+      .fsswjContent .wj-question .option-radio-group ul li {
+        animation: none;
+      }
+      .fsswjContent .wj-question .option-radio-group ul li label {
+        display: block;
+        border-bottom: 1px solid #f3f3f3;
+        border-bottom-left-radius: 0.04rem;
+        border-bottom-right-radius: 0.04rem;
+      }
+      .fsswjContent .wj-question .option-radio-group ul li label .option-text {
+        position: relative;
+        padding: 0.4rem 1.2rem;
+        display: inline-block;
+        font-weight: 400;
+        font-size: 0.6rem;
+        color: #484848;
+        vertical-align: middle;
+      }
+      .fsswjContent
+        .wj-question
+        .option-radio-group
+        ul
+        li
+        label
+        .option-text
+        span.ico-radio-wrap {
+        position: absolute;
+        border: none;
+        text-align: center;
+        top: 50%;
+        width: 0.18rem;
+        height: 0.18rem;
+        min-width: 12px;
+        min-height: 12px;
+        transform: translateY(-50%);
+        left: 0.4rem;
+      }
+      .fsswjContent
+        .wj-question
+        .option-radio-group
+        ul
+        li
+        label
+        .option-text
+        span.ico-radio-wrap
+        .ico_radio {
+        position: relative;
+        display: block;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        border: 1px solid #d8d8d8;
+      }
+      .fsswjContent
+        .wj-question
+        .option-radio-group
+        ul
+        li
+        input.option[type="radio"] {
+        position: absolute;
+        -webkit-appearance: none;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+      }
+      .fsswjContent
+        .wj-question
+        .option-radio-group
+        ul
+        li
+        input.option[type="radio"]:checked
+        + label {
+        z-index: 1;
+        box-shadow: 0 2px 4px 0 rgba(115, 202, 212, 0.1);
+        border-bottom: 1px solid rgba(115, 202, 212, 0.2);
+        background: rgba(115, 202, 212, 0.05);
+      }
+      .fsswjContent
+        .wj-question
+        .option-radio-group
+        ul
+        li
+        input.option[type="radio"]:checked
+        + label
+        .ico_radio {
+        border: 2px solid #73cad4;
+        border-radius: 50%;
+      }
+      .fsswjContent
+        .wj-question
+        .option-radio-group
+        ul
+        li
+        input.option[type="radio"]:checked
+        + label
+        .ico_radio::after {
+        content: "";
+        width: 0.08rem;
+        height: 0.08rem;
+        min-width: 4px;
+        min-height: 4px;
+        border-radius: 50%;
+        position: absolute;
+        left: 20%;
+        top: 30%;
+        background-color: #73cad4;
+      }
+      .fsswjContent .answerButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .fsswjContent .answerButton .answer-submit-btn {
+        text-align: center;
+        width: 60%;
+        background-color: #73cad4;
+        color: #fff;
+        font-size: 0.6rem;
+        height: 1.5rem;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        line-height: 1.45rem;
+        box-shadow: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="fsswjContainer">
+      <div class="fsswjContent">
+        <div class="wj-log">
+          <img src="images/fsswj_top.png" alt="个人头像" />
+        </div>
+        <div class="survey-text">
+          <div class="wj-desc">
+            <p>亲爱的居民您好！</p>
+            <p>
+              非常感谢您愿意用几分钟时间完成以下答卷。您所填信息仅用于您和家人共识，不作任何其他用途，请放心填写。
+            </p>
+            <p>
+              本问卷希望能助您了解家庭和谐状态，增进共识，与所爱的，共同成长，一起幸福。
+            </p>
+            <p>---彩虹之桥公益服务中心</p>
+          </div>
+          <div class="wj_title">家庭和谐状态评估表</div>
+        </div>
+
+        <div class="wj-question">
+          <div class="topic-title">
+            <span class="qNum">1.</span
+            >对“经营家庭的意义在于可以提升成员幸福感”这一观点共识的程度:<span
+              class="asterisk"
+              >*</span
+            >
+          </div>
+          <div class="option-radio-group">
+            <ul>
+              <li>
+                <input
+                  name="wj-radio-1"
+                  type="radio"
+                  id="option1-1"
+                  class="option"
+                  value="1-1"
+                /><label for="option1-1" class="checked_wrap"
+                  ><div class="option-text">
+                    <span class="ico-radio-wrap"
+                      ><i class="ico_radio radio_box"></i></span
+                    ><span>高度共识</span>
+                  </div></label
+                >
+              </li>
+              <li>
+                <input
+                  name="wj-radio-1"
+                  type="radio"
+                  id="option1-2"
+                  class="option"
+                  value="1-2"
+                /><label for="option1-2" class="checked_wrap"
+                  ><div class="option-text">
+                    <span class="ico-radio-wrap"
+                      ><i class="ico_radio radio_box"></i></span
+                    ><span>比较有共识</span>
+                  </div></label
+                >
+              </li>
+              <li>
+                <input
+                  name="wj-radio-1"
+                  type="radio"
+                  id="option1-3"
+                  class="option"
+                  value="1-3"
+                /><label for="option1-3" class="checked_wrap"
+                  ><div class="option-text">
+                    <span class="ico-radio-wrap"
+                      ><i class="ico_radio radio_box"></i></span
+                    ><span>不太有共识</span>
+                  </div></label
+                >
+              </li>
+              <li>
+                <input
+                  name="wj-radio-1"
+                  type="radio"
+                  id="option1-4"
+                  class="option"
+                  value="1-4"
+                /><label for="option1-4" class="checked_wrap"
+                  ><div class="option-text">
+                    <span class="ico-radio-wrap"
+                      ><i class="ico_radio radio_box"></i></span
+                    ><span>没有讨论过</span>
+                  </div></label
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="answerButton">
+          <span class="answer-submit-btn">提交</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
